@@ -43,7 +43,10 @@ export default {
         await store.dispatch('login', { email:this.authInput.txtEmail, password:this.authInput.txtPassword })
         if (this.user!=null){
           await this.$router.push('/') 
-		                  
+		  this.$message({
+			type: 'success',
+			message: 'Вход выполнен!'
+		  });
         }
       }catch(error){
         this.$message({

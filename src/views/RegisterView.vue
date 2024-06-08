@@ -40,13 +40,15 @@ export default {
   methods: {
     async login(){
       try {
-        await store.dispatch('login', { email:this.authInput.txtEmail, password:this.authInput.txtPassword })
-        if (this.user!=null){
-          await this.$router.push('/rate')                 
-        }
+        await store.dispatch('registerUser', { email:this.authRegister.txtEmail, password:this.authRegister.txtPassword })
+        this.$message({
+          type: 'success',
+          message: 'Вы зарегистрированы!'
+        });
+        await this.$router.push('/login')
       }catch(error){
         this.$message({
-          message: 'Неверный логин или пароль!',
+          message: 'Ошибка при регистрации',
           type: 'warning'
         });
       }

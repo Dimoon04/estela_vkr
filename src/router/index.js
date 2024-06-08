@@ -1,11 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Vuex from 'vuex'
+
 import firebase from 'firebase/compat/app'
 import {store} from '../store/index.js'
 import HomeView from '../views/HomeView.vue'
 
 
 Vue.use(VueRouter)
+Vue.use(Vuex)
 
 const routes = [
   {
@@ -58,6 +61,11 @@ window.onload = function() {
   router.beforeEach((to, from, next) => {
     const isLoggedIn = !!store.state.user;
     if (to.meta.requiresAuth && !isLoggedIn) {
+
+     
+
+
+
       next('/');
       alert('Вы не можете перейти на эту страницу без авторизации.');
     } else {

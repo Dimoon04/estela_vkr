@@ -1,44 +1,41 @@
 <template>
     <div class="home_body">
-        <h1>
-            Главная страница
-        </h1>
-        <router-link to="/list">Войти на страницу списка</router-link> 
-        <br><br>
-        <router-link to="/login">Вход</router-link>
-        <br><br>
-        <button @click="SignOut()">Выход</button>
-        <!-- <router-link to="register">Войти на страницу регистрации</router-link> -->
+        <navMenu></navMenu>
 
-
-
-        <br><br><br><br>
-        <p>Состояние входа пользователя:</p>
-        <p v-if="user">Авторизован</p>
-        <p v-else>Не авторизован</p>
     </div>
 </template>
 
 <script>
-import {store} from '../store/index.js'
+import navMenu from '../components/NavMenu.vue'
 export default{
     data(){
         return{
 
         }
     },
+    components:{
+        navMenu
+    },
     computed:{
-        user(){
-            return store.state.user
-        }
+        
     },
     methods:{
-        SignOut(){
-            store.dispatch("signout")
-        }
+        
     }
 }
 </script>
 <style>
+*{
+    margin: 0;
+    padding: 0;
+}
+.home_body{
+    justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background: url('../assets/fon.png') no-repeat;
+	background-size: cover;
+	background-position: center;
+}
 
 </style>
