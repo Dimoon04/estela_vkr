@@ -33,9 +33,23 @@ const routes = [
   {
     path: '/list',
     name: 'List',
-    meta: {requiresAuth:true},
+    meta: {requiresAuth:false},
 
     component: () => import('../views/ListVuew.vue')
+  },
+  {
+    path: '/about-us',
+    name: 'AboutUs',
+    meta: {requiresAuth:false},
+
+    component: () => import('../views/AboutUs.vue')
+  },
+  {
+    path: '/rate',
+    name: 'Rate',
+    meta: {requiresAuth:false},
+
+    component: () => import('../views/RateView.vue')
   }
 ]
 
@@ -61,11 +75,6 @@ window.onload = function() {
   router.beforeEach((to, from, next) => {
     const isLoggedIn = !!store.state.user;
     if (to.meta.requiresAuth && !isLoggedIn) {
-
-     
-
-
-
       next('/');
       alert('Вы не можете перейти на эту страницу без авторизации.');
     } else {
