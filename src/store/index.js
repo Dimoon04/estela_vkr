@@ -63,6 +63,9 @@ export const store = new Vuex.Store({
     SET_EMPLOYEE(state, newEmployee) {
       state.newEmployee = newEmployee
     },
+    delLessons(state) {
+      state.lessons = [];
+    }
     
   },
   actions: {
@@ -140,9 +143,22 @@ export const store = new Vuex.Store({
     delPost: firestoreAction((context, payload) => {
       return db.collection('posts').doc(payload).delete()
     }),
-    delLessons: firestoreAction((context, payload) => {
-      return db.collection('lessons').doc(payload).delete()
-    }),
+    async delLessons({ commit }) {
+      try {
+        const snapshot = await db.collection('lessons').get()
+        const batch = db.batch()
+        snapshot.docs.forEach(doc => {
+          batch.delete(doc.ref)
+        })
+        await batch.commit()
+        commit('SET_LESSONS', [])
+        console.log('Все записи расписания удалены')
+      } catch (error) {
+        console.error('Ошибка при очистке расписания:', error)
+      }
+    },
+
+    
     removeStudent({ commit }, id) {
       db.collection('students').doc(id).delete();
     },
