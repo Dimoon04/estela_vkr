@@ -143,6 +143,10 @@ export const store = new Vuex.Store({
     delLessons: firestoreAction((context, payload) => {
       return db.collection('lessons').doc(payload).delete()
     }),
+    removeStudent({ commit }, id) {
+      db.collection('students').doc(id).delete();
+    },
+
     removeEmployee({ commit }, id) {
       db.collection('employees').doc(id).delete();
     },

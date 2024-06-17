@@ -16,9 +16,9 @@
                         label="ФИО">
                         </el-table-column>
                         <el-table-column width="120px" v-if="userCondition">
-                        <template slot-scope="scope">
-                            <el-button type="danger" size="small" @click="deleteStudent(scope.row)">Удалить</el-button>
-                        </template>
+                            <template slot-scope="scope">
+                                <el-button type="danger" size="small" @click="deleteStudent(scope.row)">Удалить</el-button>
+                            </template>
                         </el-table-column>
                     </el-table>
                     </div>
@@ -139,9 +139,25 @@
                     // Здесь будет логика добавления нового ученика
             },
             deleteStudent(student) {
-                // Implement your delete logic here
-                console.log(`Delete student: ${student.fullName}`);
-            }
+            this.$confirm('Вы действительно хотите удалить сотрудника?', 'Warning', {
+            confirmButtonText: 'Да',
+            cancelButtonText: 'Нет',
+            type: 'warning'
+            }).then(() => {
+                store.dispatch('removeStudent', student.id);
+            console.log(`Удален ученик: ${student.fullName}`);
+
+                this.$message({
+                    type: 'success',
+                    message: 'Расписание удалено!'
+                });
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: 'Удаление отменено'
+                });          
+            });
+        }
         }
     }
     </script>
