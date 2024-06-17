@@ -1,21 +1,23 @@
 <template>
     <footer class="bg-gray-200 h-1/5 md:h-48 py-12 md:py-6">
-            <div class="container mx-auto p-4 md:p-6 ">
+            <div class="container w-full  p-4 md:p-6 ">
                 <div class="flex flex-wrap justify-center md:flex-no-wrap">
                   <div class="w-full md:w-1/2 xl:w-1/3 p-4 md:p-6">
                       <h5 class="uppercase text-lg mb-2">О школе</h5>
                       <ul>
-                      <li><a href="#" class="text-gray-600 hover:text-gray-900">О нас</a></li>
-                      <li><a href="#" class="text-gray-600 hover:text-gray-900">История школы</a></li>
-                      <li><a href="#" class="text-gray-600 hover:text-gray-900">Сотрудники</a></li>
+                      <!-- <li><a href="#" >О нас</a></li> -->
+                      <li><router-link to="/about-us" class="text-gray-600 hover:text-gray-900" aria-expanded="false">О нас</router-link></li>
+                      <li><router-link to="/epmloy" class="text-gray-600 hover:text-gray-900" aria-expanded="false">Сотрудники</router-link></li>
+                      
                       </ul>
                   </div>
                   <div class="w-full md:w-1/2 xl:w-1/3 p-4 md:p-6">
                       <h5 class="uppercase text-lg mb-2">Учебный процесс</h5>
                       <ul>
-                      <li><a href="#" class="text-gray-600 hover:text-gray-900">Учебные программы</a></li>
-                      <li><a href="#" class="text-gray-600 hover:text-gray-900">Расписание занятий</a></li>
-                      <li><a href="#" class="text-gray-600 hover:text-gray-900">Достижения</a></li>
+                      
+                      <!-- <li><a href="#" class="text-gray-600 hover:text-gray-900"></a></li> -->
+                      <li><router-link to="/lessons" class="text-gray-600 hover:text-gray-900" aria-expanded="false">Расписание занятий</router-link></li>
+                      
                       </ul>
                   </div>
                   <div class="w-full md:w-1/2 xl:w-1/3 p-4 md:p-6">

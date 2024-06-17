@@ -17,6 +17,10 @@
                     <label for="hashtags" class="block text-gray-700 text-sm font-bold mb-2">Хештеги:</label>
                     <input type="text" id="hashtags" v-model="newPost.hashtags" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                 </div>
+                <div class="mb-4">
+                    <label for="hashtags" class="block text-gray-700 text-sm font-bold mb-2">Ссылка:</label>
+                    <input type="text" id="hashtags" v-model="newPost.link" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                </div>
                 <!-- <input type="hidden" v-model="date" :value="today"> -->
                 <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded" type="submit" @click="addNews()">Добавить новость</button>
                 </form>
@@ -29,6 +33,9 @@
                     <div class="bg-white rounded shadow-md p-4 min-h-28" >
                         <h2 class="text-2xl font-bold mb-2">{{ news.title }}</h2>
                         <p class="text-gray-600 pb-6">{{ news.text }}</p>
+                        <p class="text-gray-600 pb-6">
+                            <a :href="news.link" target="_blank">Ссылка</a>
+                        </p>
                         <div class="flex justify-between">
                             <p class="text-gray-500 text-sm">{{ news.hashtags }}</p>
                             <p class="text-gray-500 text-sm">{{ news.date }}</p>
@@ -55,7 +62,8 @@ export default{
                 title: '',
                 text: '',
                 hashtags: '',
-                date: ''
+                date: '',
+                link:''
             }
         }
     },
@@ -86,6 +94,7 @@ export default{
                 this.newPost.title = '';
                 this.newPost.text = '';
                 this.newPost.hashtags = '';
+                this.newPost.link = '';
 
                 
             } catch (error) {

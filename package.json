@@ -4,9 +4,13 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "predeploy": "npm run build",
+    "deploy": "vk-miniapps-deploy"
   },
+  "homepage": ".",
   "dependencies": {
+    "@vkontakte/vk-miniapps-deploy": "^0.1.8",
     "core-js": "^3.8.3",
     "element-ui": "^2.15.14",
     "firebase": "^10.12.2",

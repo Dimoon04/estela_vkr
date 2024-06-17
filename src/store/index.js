@@ -10,6 +10,8 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     students:[],
+    lessons:[],
+    employees:[],
     user: null,
     newStudent:{
       fullName: '',
@@ -26,6 +28,20 @@ export const store = new Vuex.Store({
       hashtags: '',
       date: ''
     },
+    newLesson: {
+      classNumber: '',
+      lessonNumber: '',
+      monday: '',
+      tuesday: '',
+      wednesday: '',
+      thursday: '',
+      friday: ''
+    },
+    newEmployee: {
+      fullName: '',
+      position: '',
+      phoneNumber: ''
+    },
     posts:[],
   },
   getters: {
@@ -41,6 +57,12 @@ export const store = new Vuex.Store({
     SET_POST(state, newStudent) {
       state.newStudent = newStudent
     },
+    SET_LESSONS(state, newLesson) {
+      state.newLesson = newLesson
+    },
+    SET_EMPLOYEE(state, newEmployee) {
+      state.newEmployee = newEmployee
+    },
     
   },
   actions: {
@@ -50,10 +72,18 @@ export const store = new Vuex.Store({
     bindPosts: firestoreAction(({ bindFirestoreRef }) => {
       return bindFirestoreRef('posts', db.collection('posts'))
     }),
-
+    bindLessons: firestoreAction(({ bindFirestoreRef }) => {
+      return bindFirestoreRef('lessons', db.collection('lessons'))
+    }),
+    bindEmployees: firestoreAction(({ bindFirestoreRef }) => {
+      return bindFirestoreRef('employees', db.collection('employees'))
+    }),
 
     updateStudent: firestoreAction((context, { id, doc }) => {
       db.collection('students').doc(id).update(doc);
+    }),
+    updateEmployee: firestoreAction((context, { id, doc }) => {
+      db.collection('employees').doc(id).update(doc);
     }),
 
     async addPost({ commit }, newpost) {
@@ -62,6 +92,22 @@ export const store = new Vuex.Store({
         commit('SET_POST', [this.state.newpost, newpost])
       } catch (error) {
         console.error('Ошибка при добавлении ученика', error)
+      }
+    },
+    async addLesson({ commit }, newLesson) {
+      try {
+        await db.collection('lessons').add(newLesson)
+        commit('SET_LESSONS', [this.state.newLesson, newLesson])
+      } catch (error) {
+        console.error('Ошибка при добавлении ученика', error)
+      }
+    },
+    async addEmployee({ commit }, newEmployee) {
+      try {
+        await db.collection('employees').add(newEmployee)
+        commit('SET_EMPLOYEE', newEmployee)
+      } catch (error) {
+        console.error('Ошибка при добавлении сотрудника', error)
       }
     },
 
@@ -77,12 +123,29 @@ export const store = new Vuex.Store({
         console.error('Ошибка при добавлении ученика', error)
       }
     },
+
+    async updateLesson({ commit }, lesson) {
+      try {
+        await db.collection('lessons').doc(lesson.id).update(lesson);
+        commit('SET_LESSONS', lesson);
+      } catch (error) {
+        console.error('Ошибка при обновлении урока', error)
+      }
+    },
+
+
     delStudent: firestoreAction((context, payload) => {
       return db.collection('students').doc(payload).delete()
     }),
     delPost: firestoreAction((context, payload) => {
       return db.collection('posts').doc(payload).delete()
     }),
+    delLessons: firestoreAction((context, payload) => {
+      return db.collection('lessons').doc(payload).delete()
+    }),
+    removeEmployee({ commit }, id) {
+      db.collection('employees').doc(id).delete();
+    },
 
 
 
@@ -126,3 +189,5 @@ export const store = new Vuex.Store({
 })
 store.dispatch('bindStudents')
 store.dispatch('bindPosts')
+store.dispatch('bindLessons')
+store.dispatch('bindEmployees')

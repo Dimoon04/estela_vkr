@@ -50,6 +50,20 @@ const routes = [
     meta: {requiresAuth:false},
 
     component: () => import('../views/RateView.vue')
+  },
+  {
+    path: '/lessons',
+    name: 'lessons',
+    meta: {requiresAuth:false},
+
+    component: () => import('../views/RasView.vue')
+  },
+  {
+    path: '/employ',
+    name: 'employ',
+    meta: {requiresAuth:false},
+
+    component: () => import('../views/EmployView.vue')
   }
 ]
 
